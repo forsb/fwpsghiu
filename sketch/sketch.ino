@@ -1,3 +1,11 @@
+#include "dht.h"
+
+#define PIN_PHOTO     0
+#define PIN_PHOTO_POW 5
+
+#define PIN_DHT_SDA   12
+#define PIN_DHT_POW   13
+
 int val = 0;
 
 void setup()
