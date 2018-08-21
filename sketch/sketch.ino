@@ -8,18 +8,37 @@
 
 int val = 0;
 
+dht DHT;
+
 void setup()
 {
-  pinMode(5, OUTPUT);
-  digitalWrite(5, HIGH);
+  pinMode(PIN_PHOTO_POW, OUTPUT);
+  digitalWrite(PIN_PHOTO_POW, HIGH);
+
+  pinMode(PIN_DHT_POW, OUTPUT);
+  digitalWrite(PIN_DHT_POW, HIGH);
   
   Serial.begin(9600);
 }
 
 void loop()
 {
-  val = analogRead(0);
+  val = analogRead(PIN_PHOTO);
   Serial.println(val);
+  
+  // --- DHT22 ---
+  int chk = DHT.read22(PIN_DHT_SDA);
+  
+  if (chk != DHTLIB_OK) {
+    Serial.println("DHT error."); 
+    //Serial.println(chk);
+  }
+  else {
+    Serial.print(DHT.humidity, 1);
+    Serial.print(",\t");
+    Serial.println(DHT.temperature, 1);
+  }
+  
 
-  delay(500);
+  delay(3000);
 }
